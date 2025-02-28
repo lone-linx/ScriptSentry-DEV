@@ -1058,10 +1058,10 @@ function Get-LogonScripts {
 
         $ExtensionList = '.bat|.vbs|.ps1|.cmd|.kix'
         $LogonScripts = try { Get-ChildItem -Path $SysvolScripts -Recurse | Where-Object {$_.Extension -match $ExtensionList} } catch {}
-        Write-Verbose "[+] Logon scripts:"
-        $LogonScripts | ForEach-Object {
-            Write-Verbose -Message "$($_.fullName)"
-        }
+        # Write-Verbose "[+] Logon scripts:"
+        # $LogonScripts | ForEach-Object {
+        #     Write-Verbose -Message "$($_.fullName)"
+        # }
         $LogonScripts | Sort-Object -Unique
     }
 }
@@ -1102,10 +1102,10 @@ function Get-GPOLogonScripts {
 
         $Policies | ForEach-Object { 
             $GPOLogonScripts = Get-Content -Path "$($_.FullName)\User\Scripts\scripts.ini" -ErrorAction SilentlyContinue | Select-String -Pattern "\\\\.*\.\w+" | ForEach-Object { $_.Matches.Value }
-            Write-Verbose "[+] GPO Logon scripts:"
-            $GPOLogonScripts | ForEach-Object {
-                Write-Verbose -Message "$($_.fullName)"
-            }
+            # Write-Verbose "[+] GPO Logon scripts:"
+            # $GPOLogonScripts | ForEach-Object {
+            #     Write-Verbose -Message "$($_.fullName)"
+            # }
             if ($GPOLogonScripts) {
                 Get-Item -Path $GPOLogonScripts | Sort-Object -Unique
             }
@@ -1358,10 +1358,10 @@ function Find-UNCScripts {
             }
         }
     }
-    Write-Verbose "[+] UNC scripts:"
-    $UNCFiles | ForEach-Object {
-        Write-Verbose -Message "$_"
-    }
+    # Write-Verbose "[+] UNC scripts:"
+    # $UNCFiles | ForEach-Object {
+    #     Write-Verbose -Message "$_"
+    # }
     
     $UNCFiles | Sort-Object -Unique
 }
@@ -1395,10 +1395,10 @@ function Find-MappedDrives {
         }
     }
 
-    Write-Verbose "[+] Mapped drives:"
-    $Shares | Sort-Object -Unique | ForEach-Object {
-        Write-Verbose -Message "$_"
-    }
+    # Write-Verbose "[+] Mapped drives:"
+    # $Shares | Sort-Object -Unique | ForEach-Object {
+    #     Write-Verbose -Message "$_"
+    # }
 
     $Shares | Sort-Object -Unique
 }
